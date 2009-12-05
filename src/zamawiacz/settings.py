@@ -79,9 +79,10 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'langacore.kit.django.common',
+    'zamawiacz.zamawianie',
 )
 
-AUTH_PROFILE_MODULE = 'account.userprofile'
+#AUTH_PROFILE_MODULE = 'account.userprofile'
 
 from langacore.kit.django import profile_support
 execfile(profile_support)
