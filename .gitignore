@@ -1,0 +1,10 @@
+*.pyc
+*.pyo
+*.db
+*.old
+*.bak
+*.swp
+.DS_Store
+/doc/_build
+/src/langacore.zamawiacz.egg-info
+/src/zamawiacz/settings-local.py
