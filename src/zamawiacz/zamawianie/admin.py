@@ -25,12 +25,19 @@ admin.site.register(Customer, CustomerAdmin)
 
 class EntryInline(admin.TabularInline):
     model = Entry
-    extra = 10
+    extra = 30
 
 
 class OrderAdmin(admin.ModelAdmin):
+    def orders(self):
+        result = []
+        for entry in self.entry_set.all():
+            result.append(u"%d %s %s" % (entry.quantity, (u"x %.2f" % entry.multiplier.value if entry.multiplier.value != 1 else u""), entry.product))
+        return u', '.join(result)
+    orders.short_description = u'Wpisy'
+    
     inlines = (EntryInline,)
-    list_display = ('due', 'customer', 'created', 'modified',)
+    list_display = ('due', 'customer', 'created', 'modified', orders)
     list_filter = ('due', 'customer', 'created', 'modified',)
     save_on_top = True
 

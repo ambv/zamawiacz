@@ -78,7 +78,7 @@ class Product(db.Model):
 class Entry(db.Model):
     order = db.ForeignKey(Order, verbose_name=u"Zamówienie")
     quantity = db.PositiveIntegerField(verbose_name=u"Ile")
-    multiplier = db.ForeignKey(Multiplier, verbose_name=u"Mnożnik")
+    multiplier = db.ForeignKey(Multiplier, verbose_name=u"Mnożnik", blank=True, null=True)
     product = db.ForeignKey(Product, verbose_name=u"Produkt")
     remarks = db.CharField(verbose_name=u"Uwagi", max_length=100, blank=True)
 
@@ -90,3 +90,8 @@ class Entry(db.Model):
 
     def __unicode__(self):
         return u"%d x %s  %s" % (self.quantity, self.multiplier, self.product)
+
+    def save(self):
+        if self.multiplier is None:
+            self.multiplier = Multiplier.objects.get(value=1)
+        super(Entry, self).save()
