@@ -72,7 +72,7 @@ class Product(db.Model):
         ordering = ('name', 'unit',)
 
     def __unicode__(self):
-        return "%s (%s)" % (self.name, self.unit)
+        return "%s (%s)" % (self.name, self.unit.shortform)
 
 
 class Entry(db.Model):
