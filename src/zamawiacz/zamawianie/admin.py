@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from django_extensions.admin import ForeignKeyAutocompleteInlineMixin, ForeignKeyAutocompleteModelMixin
+
 from zamawiacz.zamawianie.models import Unit, Multiplier, Customer, Order, Product, Entry
 
 
@@ -23,12 +25,14 @@ class CustomerAdmin(admin.ModelAdmin):
 admin.site.register(Customer, CustomerAdmin)
 
 
-class EntryInline(admin.TabularInline):
+class EntryInline(ForeignKeyAutocompleteInlineMixin, admin.TabularInline):
     model = Entry
+    related_search_fields = {'product': ('name',)}
+    hide_id_textfields = ('product', )
     extra = 30
 
 
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(ForeignKeyAutocompleteModelMixin, admin.ModelAdmin):
     def orders(self):
         result = {}
         for entry in self.entry_set.all():
