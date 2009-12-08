@@ -12,7 +12,7 @@ class Unit(db.Model):
         ordering = ('name',)
 
     def __unicode__(self):
-        return self.name
+        return self.shortform
 
 
 class Multiplier(db.Model):
@@ -46,11 +46,6 @@ class Order(db.Model):
     customer = db.ForeignKey(Customer, verbose_name=u"Klient")
     due = db.DateTimeField(verbose_name=u"Na kiedy", default=datetime.now)
 
-    def save(self):
-        self.modified = datetime.now()
-        super(Order, self).save()
-
-
     class Meta:
         verbose_name = u'Zamówienie'
         verbose_name_plural = u'Zamówienia'
@@ -59,29 +54,32 @@ class Order(db.Model):
     def __unicode__(self):
         return u"Zamówienie z dn. %s dla %s" % (self.created, self.customer)
 
+    def save(self):
+        self.modified = datetime.now()
+        super(Order, self).save()
+
 
 class Product(db.Model):
     name = db.CharField(verbose_name=u"Nazwa", max_length=50)
     description = db.TextField(verbose_name=u"Opis", blank=True)
     unit = db.ForeignKey(Unit, verbose_name=u"Jednostka sprzedaży")
 
-
     class Meta:
         verbose_name = u'Produkt'
         verbose_name_plural = u'Produkty'
-        ordering = ('name', 'unit',)
+        ordering = ('name',)
 
     def __unicode__(self):
-        return "%s (%s)" % (self.name, self.unit.shortform)
+        return "%s" % (self.name,)
 
 
 class Entry(db.Model):
     order = db.ForeignKey(Order, verbose_name=u"Zamówienie")
     quantity = db.PositiveIntegerField(verbose_name=u"Ile")
     multiplier = db.ForeignKey(Multiplier, verbose_name=u"Mnożnik", blank=True, null=True)
+    unit = db.ForeignKey(Unit, verbose_name=u"Jednostka sprzedaży", blank=True, null=True)
     product = db.ForeignKey(Product, verbose_name=u"Produkt")
     remarks = db.CharField(verbose_name=u"Uwagi", max_length=100, blank=True)
-
 
     class Meta:
         verbose_name = u'Wpis'
@@ -94,4 +92,6 @@ class Entry(db.Model):
     def save(self):
         if self.multiplier is None:
             self.multiplier = Multiplier.objects.get(value=1)
+        if self.unit is None:
+            self.unit = self.product.unit 
         super(Entry, self).save()

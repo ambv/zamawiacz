@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django_extensions',
+    'django_evolution',
     'langacore.kit.django.common',
     'zamawiacz.zamawianie',
 )

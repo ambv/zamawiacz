@@ -8,4 +8,5 @@
 /doc/_build
 /src/langacore.zamawiacz.egg-info
 /src/zamawiacz/settings-local.py
+/src/zamawiacz/django_evolution
 /src/zamawiacz/media/django_extensions
