@@ -58,6 +58,24 @@ class Order(db.Model):
         self.modified = datetime.now()
         super(Order, self).save()
 
+    def entries_summary_count(self):
+        result = {}
+        for entry in self.entry_set.all():
+            key = (entry.product, entry.multiplier, entry.unit) 
+            if key not in result:
+                result[key] = entry.quantity
+        return len(result)
+    
+    def entries_summary(self):
+        result = {}
+        for entry in self.entry_set.all():
+            key = (entry.product, entry.multiplier, entry.unit) 
+            if key not in result:
+                result[key] = entry.quantity
+            else:
+                result[key] += entry.quantity
+        return ((v, u" x %.2f" % k[1].value if k[1].value != 1 else u"", k[2], k[0]) for k, v in result.iteritems())
+
 
 class Product(db.Model):
     name = db.CharField(verbose_name=u"Nazwa", max_length=50)

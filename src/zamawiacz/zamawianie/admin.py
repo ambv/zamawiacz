@@ -41,7 +41,7 @@ class OrderAdmin(ForeignKeyAutocompleteModelMixin, admin.ModelAdmin):
                 result[key] = entry.quantity
             else:
                 result[key] += entry.quantity
-        return u', '.join((u"%d %s%s %s" % (v, (u"x %.2f " % k[1].value if k[1].value != 1 else u""), k[2], k[0]) for k, v in result.iteritems()))
+        return u', '.join((u"%d %s%s %s" % (v, (u"x %.2f " % k[1].value if k[1].value != 1 else u""), k[2] if k[2] is not None else u"", k[0]) for k, v in result.iteritems()))
     orders.short_description = u'Wpisy'
     
     inlines = (EntryInline,)

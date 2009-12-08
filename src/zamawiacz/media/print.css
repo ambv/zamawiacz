@@ -1,0 +1,50 @@
+body, table {
+		font-size: 8pt;
+}
+
+.order {
+		font-family: Verdana, Tahoma, Arial;
+		width: 45%;
+		border: 1px solid #cccccc;
+		padding: 12px;
+		float:left; display: inline; *margin-left:-0.04em;
+}
+
+.order_name {
+		float: right;
+}
+
+.order_due {
+		float: left;
+}
+
+.order_entries table {
+		width: 100%;
+		border-collapse: collapse;
+		border: 1px solid #888888;
+}
+
+.order_entries td, .order_entries th {
+		border: 1px solid #888888;
+		padding: 5px;
+}
+
+.order_entries .col10 {
+		width: 10%;
+}
+
+.order_entries .col20 {
+		width: 30%;
+}
+
+.order_entries .left {
+		text-align: left;
+}
+
+.order_entries .center {
+		text-align: center;
+}
+
+.order_header {
+		height: 35px;
+}
