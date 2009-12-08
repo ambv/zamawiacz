@@ -62,7 +62,6 @@ class Order(db.Model):
 class Product(db.Model):
     name = db.CharField(verbose_name=u"Nazwa", max_length=50)
     description = db.TextField(verbose_name=u"Opis", blank=True)
-    unit = db.ForeignKey(Unit, verbose_name=u"Jednostka sprzedaży")
 
     class Meta:
         verbose_name = u'Produkt'
@@ -92,6 +91,4 @@ class Entry(db.Model):
     def save(self):
         if self.multiplier is None:
             self.multiplier = Multiplier.objects.get(value=1)
-        if self.unit is None:
-            self.unit = self.product.unit 
         super(Entry, self).save()

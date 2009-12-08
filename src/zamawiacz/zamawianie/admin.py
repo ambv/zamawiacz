@@ -53,8 +53,8 @@ admin.site.register(Order, OrderAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'description', 'unit')
-    list_filter = ('unit',)
+    list_display = ('name', 'description', )
+    list_filter = ('name',)
     search_fields = ('name',)
 
 admin.site.register(Product, ProductAdmin)
