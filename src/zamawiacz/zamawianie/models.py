@@ -49,7 +49,7 @@ class Order(db.Model):
     class Meta:
         verbose_name = u'Zamówienie'
         verbose_name_plural = u'Zamówienia'
-        ordering = ('due', 'customer', 'created',)
+        ordering = ('-due', 'customer', 'created',)
 
     def __unicode__(self):
         return u"Zamówienie z dn. %s dla %s" % (self.created, self.customer)
