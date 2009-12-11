@@ -1,3 +1,4 @@
+{% load zamawianie %}
 <html>
 	<head>
 		<title>Wydruk zamówień do {{due.day}}/{{due.month}}/{{due.year}}</title>
@@ -11,8 +12,8 @@
 				{{order.customer.name}}<br/>{{order.customer.locality}}
 			</div>
 			<div class="order_due">
-				{{due.day}}/{{due.month}}/{{due.year}}<br/>
-				{{due_day_of_week}}
+				{{order.due.day}}/{{order.due.month}}/{{order.due.year}}<br/>
+				{{order.due|polish_weekday}}
 			</div>
 				</div>
 			<div class="order_entries">

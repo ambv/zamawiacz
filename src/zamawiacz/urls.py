@@ -9,5 +9,7 @@ urlpatterns = patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+    (r'^drukuj-na-dzisiaj/$', 'zamawiacz.zamawianie.views.print_today'),
     (r'^drukuj-na-jutro/$', 'zamawiacz.zamawianie.views.print_tomorrow'),
+    (r'^drukuj-na-2-dni/$', 'zamawiacz.zamawianie.views.print_2days'),
 )
