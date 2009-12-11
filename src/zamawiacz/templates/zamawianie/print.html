@@ -11,14 +11,15 @@
 				{{order.customer.name}}<br/>{{order.customer.locality}}
 			</div>
 			<div class="order_due">
-					{{due.day}}/{{due.month}}/{{due.year}}
+				{{due.day}}/{{due.month}}/{{due.year}}<br/>
+				{{due_day_of_week}}
 			</div>
 				</div>
 			<div class="order_entries">
 				<table>
-					<tr><th class="col10">Lp.</th><th class="col20">Ilość</th><th class="col10">Jedn.</th><th class="left">Produkt</th></tr>
+					<tr><th class="col10">Lp.</th><th class="col30">Ilość</th><th class="col10">Jedn.</th><th class="col40 left">Produkt</th><th class="col10">Waga</th></tr>
 					{% for entry in order.entries_summary %}
-					<tr><td class="center">{{forloop.counter}}.</td><td class="center">{{entry.0}}{{entry.1}}</td><td class="center">{{entry.2}}</td><td>{{entry.3}}</td></tr>
+					<tr><td class="center">{{forloop.counter}}.</td><td class="center">{{entry.0}}{{entry.1}}</td><td class="center">{{entry.2}}</td><td>{{entry.3}}</td><td></td></tr>
 					{% endfor %}
 				</table>
 			</div>

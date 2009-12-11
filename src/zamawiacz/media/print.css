@@ -35,8 +35,12 @@ body, table {
 		width: 10%;
 }
 
-.order_entries .col20 {
+.order_entries .col30 {
 		width: 30%;
+}
+
+.order_entries .col40 {
+		width: 40%;
 }
 
 .order_entries .left {
