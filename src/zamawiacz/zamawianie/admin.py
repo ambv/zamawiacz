@@ -8,6 +8,7 @@ from zamawiacz.zamawianie.models import Unit, Multiplier, Customer, Order, Produ
 class UnitAdmin(admin.ModelAdmin):
     list_display = ('name', 'shortform',)
     search_fields = ('name',)
+    save_on_top = True
 
 admin.site.register(Unit, UnitAdmin)
 
@@ -21,7 +22,6 @@ admin.site.register(Multiplier, MultiplierAdmin)
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('name', 'locality',)
     search_fields = ('name', 'locality',)
-    save_as = True
     save_on_top = True
 
 admin.site.register(Customer, CustomerAdmin)
@@ -50,7 +50,6 @@ class OrderAdmin(ForeignKeyAutocompleteModelMixin, admin.ModelAdmin):
     list_display = ('due', 'customer', 'created', 'modified', orders)
     list_filter = ('due', 'customer', 'created', 'modified',)
     readonly_fields = ('created', 'modified')
-    save_as = True
     save_on_top = True
 
 admin.site.register(Order, OrderAdmin)
@@ -60,7 +59,6 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', )
     list_filter = ('name',)
     search_fields = ('name',)
-    save_as = True
     save_on_top = True
 
 admin.site.register(Product, ProductAdmin)
