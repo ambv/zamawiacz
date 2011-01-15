@@ -58,18 +58,22 @@ class Order(db.Model):
         self.modified = datetime.now()
         super(Order, self).save()
 
+    def entries_count(self):
+        """Simply counts the number of entries in an order."""
+        return self.entry_set.all().count()
+
     def entries_summary_count(self):
         result = {}
         for entry in self.entry_set.all():
-            key = (entry.product, entry.multiplier, entry.unit) 
+            key = (entry.product, entry.multiplier, entry.unit)
             if key not in result:
                 result[key] = entry.quantity
         return len(result)
-    
+
     def entries_summary(self):
         result = {}
         for entry in self.entry_set.all():
-            key = (entry.product, entry.multiplier, entry.unit) 
+            key = (entry.product, entry.multiplier, entry.unit)
             if key not in result:
                 result[key] = entry.quantity
             else:

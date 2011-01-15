@@ -1,12 +1,17 @@
+.page {
+        height: 700pt;
+        width: 480pt;
+}
+
 body, table {
 		font-size: 8pt;
-	  margin-left: 0;
+        margin-left: 0;
 }
 
 .order {
 		font-family: Verdana, Tahoma, Arial;
-		width: 45%;
-		border: 1px solid #cccccc;
+		width: 220pt;
+		border: 1pt solid #cccccc;
 		padding: 12px;
 		float:left; display: inline; *margin-left:-0.04em;
 		page-break-inside: avoid;
@@ -23,12 +28,12 @@ body, table {
 .order_entries table {
 		width: 100%;
 		border-collapse: collapse;
-		border: 1px solid #888888;
+		border: 1pt solid #888888;
 }
 
 .order_entries td, .order_entries th {
-		border: 1px solid #888888;
-		padding: 5px;
+		border: 1pt solid #888888;
+		padding: 3pt;
 }
 
 .order_entries .col10 {
@@ -52,5 +57,5 @@ body, table {
 }
 
 .order_header {
-		height: 35px;
+		height: 25pt;
 }

@@ -2,6 +2,9 @@
 from langacore.kit.django import current_dir_support
 execfile(current_dir_support)
 
+from langacore.kit.django import namespace_package_support
+execfile(namespace_package_support)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -33,6 +36,7 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
+USE_L10N = True
 USE_I18N = True
 
 # Absolute path to the directory that holds media.

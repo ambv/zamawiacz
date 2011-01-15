@@ -21,6 +21,8 @@ admin.site.register(Multiplier, MultiplierAdmin)
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('name', 'locality',)
     search_fields = ('name', 'locality',)
+    save_as = True
+    save_on_top = True
 
 admin.site.register(Customer, CustomerAdmin)
 
@@ -36,17 +38,19 @@ class OrderAdmin(ForeignKeyAutocompleteModelMixin, admin.ModelAdmin):
     def orders(self):
         result = {}
         for entry in self.entry_set.all():
-            key = (entry.product, entry.multiplier, entry.unit) 
+            key = (entry.product, entry.multiplier, entry.unit)
             if key not in result:
                 result[key] = entry.quantity
             else:
                 result[key] += entry.quantity
         return u', '.join((u"%d %s%s %s" % (v, (u"x %.2f " % k[1].value if k[1].value != 1 else u""), k[2] if k[2] is not None else u"", k[0]) for k, v in result.iteritems()))
     orders.short_description = u'Wpisy'
-    
+
     inlines = (EntryInline,)
     list_display = ('due', 'customer', 'created', 'modified', orders)
     list_filter = ('due', 'customer', 'created', 'modified',)
+    readonly_fields = ('created', 'modified')
+    save_as = True
     save_on_top = True
 
 admin.site.register(Order, OrderAdmin)
@@ -56,5 +60,14 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'description', )
     list_filter = ('name',)
     search_fields = ('name',)
+    save_as = True
+    save_on_top = True
 
 admin.site.register(Product, ProductAdmin)
+
+
+from django_evolution.models import Version as _Version, Evolution as _Evolution
+admin.site.unregister(_Version)
+admin.site.unregister(_Evolution)
+del _Version
+del _Evolution

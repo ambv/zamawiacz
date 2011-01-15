@@ -5,26 +5,31 @@
 		<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="/media/print.css">
 	</head>
 	<body onload="window.print()">
-		{% for order in orders %}
-		<div class="order">
-				<div class="order_header">
-		  <div class="order_name">
-				{{order.customer.name}}<br/>{{order.customer.locality}}
-			</div>
-			<div class="order_due">
-				{{order.due.day}}/{{order.due.month}}/{{order.due.year}}<br/>
-				{{order.due|polish_weekday}}
-			</div>
-				</div>
-			<div class="order_entries">
-				<table>
-					<tr><th class="col10">Lp.</th><th class="col30">Ilość</th><th class="col10">Jedn.</th><th class="col40 left">Produkt</th><th class="col10">Waga</th></tr>
-					{% for entry in order.entries_summary %}
-					<tr><td class="center">{{forloop.counter}}.</td><td class="center">{{entry.0}}{{entry.1}}</td><td class="center">{{entry.2}}</td><td>{{entry.3}}</td><td></td></tr>
-					{% endfor %}
-				</table>
-			</div>
-		</div>
-		{% endfor %}
+        {% for page in pages %}
+            <div class="page">
+                <p style="text-align: right;">Strona {{page.num}}</p>
+                {% for order in page.orders %}
+                <div class="order">
+                        <div class="order_header">
+                <div class="order_name">
+                        {{order.customer.name}}<br/>{{order.customer.locality}}
+                    </div>
+                    <div class="order_due">
+                        {{order.due.day}}/{{order.due.month}}/{{order.due.year}}<br/>
+                        {{order.due|polish_weekday}}
+                    </div>
+                        </div>
+                    <div class="order_entries">
+                        <table>
+                            <tr><th class="col10">Lp.</th><th class="col30">Ilość</th><th class="col10">Jedn.</th><th class="col40 left">Produkt</th><th class="col10">Waga</th></tr>
+                            {% for entry in order.entries_summary %}
+                            <tr><td class="center">{{forloop.counter}}.</td><td class="center">{{entry.0}}{{entry.1}}</td><td class="center">{{entry.2}}</td><td>{{entry.3}}</td><td></td></tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
 	</body>
 </html>
