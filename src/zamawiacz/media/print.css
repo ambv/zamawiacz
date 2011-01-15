@@ -1,6 +1,8 @@
 .page {
         height: 700pt;
         width: 480pt;
+        margin: 0;
+        padding: 0;
 }
 
 body, table {

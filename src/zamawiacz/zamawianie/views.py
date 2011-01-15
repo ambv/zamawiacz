@@ -5,7 +5,7 @@ from langacore.kit.django.helpers import render
 
 from zamawiacz.zamawianie.models import Unit, Multiplier, Customer, Order, Product, Entry
 
-HEADER_HEIGHT = 3
+HEADER_HEIGHT = 2
 PAGE_HEIGHT = 30
 
 def _paginate(orders):
@@ -19,14 +19,12 @@ def _paginate(orders):
         if page['height'] + height > PAGE_HEIGHT:
             pages.append(page)
             page = {'orders': [], 'height': 0, 'num': page['num'] + 1}
-        else:
-            page['height'] += height
+        page['height'] += height
         page['orders'].append(orders[i])
         if order_length > i+1:
             page['orders'].append(orders[i+1])
     pages.append(page)
     return pages
-
 
 def print_tomorrow(request):
     return print_for(request, timedelta(days=1), timedelta(days=2))
@@ -47,7 +45,7 @@ def print_for(request, delta_start, delta_end):
         #return x.entries_summary_count() - y.entries_summary_count()
         return x.entries_count() - y.entries_count()
 
-    orders.sort(order_compare, reverse=True)
+    orders.sort(order_compare)
     pages = _paginate(orders)
 
     return render(request, 'zamawianie/print.html', locals())
